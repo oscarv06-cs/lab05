@@ -4,22 +4,21 @@
 
 Student::Student(int perm, 
     std::string lastName, 
-		std::string firstAndMiddleNames) : perm(perm), lastname(lastname),
-    firstAndMiddleNames(firstAndMiddleNames){
-    Student::Student(std::string string){
-      std::stringStream ss(string);
+		std::string firstAndMiddleNames) : perm(perm), lastName(lastName),
+    firstAndMiddleNames(firstAndMiddleNames){}
+    Student::Student(std::string str){
+      std::stringstream ss(str);
       std::string permanentstr;
 
-      std::getline(ss, permString, ",");
-      std::getline(ss, lastnameString, ",");
-      std::getline(ss, firstAndMiddleNamesString, ",");
+      // std::getline(ss, permString, ",");
+      // std::getline(ss, lastnameString, ",");
+      // std::getline(ss, firstAndMiddleNamesString, ",");
 
-      perm = std::stoi(permString)
+      perm = std::stoi(permString);
 
     }
 
 
-}
 // construct a Student object from a single line of
 // comma separated text, e.g. "1234567,Smith,Mary Kay"
 
