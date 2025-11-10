@@ -21,12 +21,12 @@ Student::Student (std::string csvString) {
   // We read from the stream until the delimiter is encountered 
   
   std::string permAsString;
-  getline(iss, permAsString, ',');
+  std::getline(iss, permAsString, ',');
   this->perm = std::stoi(permAsString); // stoi converts std::string to int
 
-  getline(iss, this->lastName, ',');
+  std::getline(iss, this->lastName, ',');
 
-  getline(iss, this->firstAndMiddleNames, '\n');
+  std::getline(iss, this->firstAndMiddleNames, '\n');
 }
 
 
@@ -43,7 +43,7 @@ std::string Student::getFirstAndMiddleNames() const {
 }
 
 std::string Student::getFullName() const { 
-  return fullName;
+  return firstAndMiddleNames + " " + lastName;
 }
 
 std::string Student::toString() const { 
