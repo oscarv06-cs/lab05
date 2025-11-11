@@ -83,16 +83,20 @@ std::string Roster::toString() const {
   
   for (int i = 0; i < numStudents; i++) {
     result += students[i]->toString();
-    result += "\n";
+    if (i < numStudents - 1){
+      result += ",\n";         
+    } 
+    else{
+      result += "\n";         
+    }
   }
   result += "}\n";
   return result;
-
 }
 
 void Roster::sortByPerm() {
   // SELECTION SORT
-  for (int i = this->numStudents; i >= 1; i--){
+  for (int i = this->numStudents; i >= 2; i--){
     this->sortByPermHelper(i);
   }
 }
@@ -100,26 +104,21 @@ void Roster::sortByPerm() {
 int Roster::indexOfMaxPermAmongFirstKStudents(int k) const {
   assert(k >= 1 && k <= this->numStudents);
 
-  int imax = 0; //current max index starting at zero to begin loop
+  int max = 0; //current max index starting at zero to begin loop
   for (int i = 1; i < k; i++) {
-    if (this->students[i]->getPerm() > this->students[imax]->getPerm()) {
-      imax = i;
+    if (this->students[i]->getPerm() > this->students[max]->getPerm()) {
+      max = i;
     }
   }
-  return imax;
+  return max;
 }
 
 
 void Roster::sortByPermHelper(int k) {
   // swaps max perm from [0..k-1] with elem [k-1]
-
-
   int im = indexOfMaxPermAmongFirstKStudents(k);
-
   // now swap the pointers between index im and index k-1
   Student* tmp = students[im];
   students[im] = students[k - 1];
   students[k - 1] = tmp;
-  // THIS IS STILL A STUB !!!
-  
 }
