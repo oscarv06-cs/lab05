@@ -71,18 +71,20 @@ void Roster::addStudentsFromStream(std::istream &is) {
 }
 
 int Roster::getNumStudents() const { 
-  return -999; // stub
+  return this->numStudents; // stub
 }
 
 Student Roster::getStudentAt(int index) const { 
-  return Student(-999,"Stubbi","Stubsdottir"); 
+  return *students[index]; 
 }
 
 std::string Roster::toString() const {
   std::string result = "{\n";
   
-  result += "STUB!!!!";   // @@@ RESTORE THIS 
-
+  for (int i = 0; i < numStudents; i++) {
+    result += students[i]->toString();
+    result += "\n";
+  }
   result += "}\n";
   return result;
 
@@ -90,12 +92,23 @@ std::string Roster::toString() const {
 
 void Roster::sortByPerm() {
   // SELECTION SORT
-  // stub does nothing
+  for (int i = this->numStudents; i >= 1; i--){
+    this->sortByPermHelper(i);
+  }
 }
 
 int Roster::indexOfMaxPermAmongFirstKStudents(int k) const {
-  return 0; // STUB
+  assert(k >= 1 && k <= this->numStudents);
+
+  int imax = 0; //current max index starting at zero to begin loop
+  for (int i = 1; i < k; i++) {
+    if (this->students[i]->getPerm() > this->students[imax]->getPerm()) {
+      imax = i;
+    }
+  }
+  return imax;
 }
+
 
 void Roster::sortByPermHelper(int k) {
   // swaps max perm from [0..k-1] with elem [k-1]
@@ -104,7 +117,9 @@ void Roster::sortByPermHelper(int k) {
   int im = indexOfMaxPermAmongFirstKStudents(k);
 
   // now swap the pointers between index im and index k-1
-
+  Student* tmp = students[im];
+  students[im] = students[k - 1];
+  students[k - 1] = tmp;
   // THIS IS STILL A STUB !!!
   
 }
